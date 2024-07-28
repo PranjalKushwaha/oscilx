@@ -38,12 +38,12 @@
 <meta property="og:url" content="https://oscilx.com/benchmark/" />
 <meta property="og:site_name" content="Oscilx Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-07-21T11:57:36+05:30" />
+<meta property="article:published_time" content="2024-07-28T15:30:39+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Benchmark" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-21T11:57:36+05:30","datePublished":"2024-07-21T11:57:36+05:30","description":"Introduction","headline":"Benchmark","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/benchmark/"},"url":"https://oscilx.com/benchmark/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T15:30:39+05:30","datePublished":"2024-07-28T15:30:39+05:30","description":"Introduction","headline":"Benchmark","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/benchmark/"},"url":"https://oscilx.com/benchmark/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -647,13 +647,13 @@
 
 <time
   
-  data-ts="1721543256"
+  data-ts="1722160839"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jul 21, 2024
+  Jul 28, 2024
 </time>
 
       </span>
@@ -702,7 +702,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1037 words"
+  title="1030 words"
 >
   <em>5 min</em> read</span>
 
@@ -714,8 +714,7 @@
   <div class="content">
     <h2 id="introduction"><span class="me-2">Introduction</span><a href="#introduction" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>This technical write-up presents the preliminary energy consumption measurements and estimated battery life for devices utilizing the wireless mesh protocol developed by Oscilx Labs.<br />
-These results are initial findings and should be considered as such, with significant improvements expected in future hardware and software revisions.</p>
+<p>This technical write-up presents the preliminary energy consumption measurements and estimated battery life for devices utilizing the Arach protocol developed by Oscilx Labs. These results are initial findings and should be considered as such, with significant improvements expected in future hardware and software revisions.</p>
 
 <h2 id="hardware"><span class="me-2">Hardware</span><a href="#hardware" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -807,7 +806,7 @@ These results are initial findings and should be considered as such, with signif
 
 <p>For a detailed explanation of the parameters discussed in this section, please refer to the <a href="/proof-of-concept/#protocol-primer" target="\_blank">Protocol Primer</a>.</p>
 
-<p>All nodes except the root run the same program based on the custom wireless protocol. The root has additional logging and UART commands for network control accessible by the host computer. The nodes generate a 25-byte packet every 30 seconds that contains timing, power source voltage and temperature data.</p>
+<p>All nodes except the root run the same program based on the Arach protocol. The root has additional logging and UART commands for network control accessible by the host computer. The nodes generate a 25-byte packet every 30 seconds that contains timing, power source voltage and temperature data.</p>
 
 <p>The code was compiled using the <a href="https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm" target="\_blank">ARM-LLVM toolchain</a> with the major parameters being:</p>
 
@@ -1044,7 +1043,7 @@ This is another popular power source for low-power devices and wearables. The ce
 
 <h2 id="conclusions"><span class="me-2">Conclusions</span><a href="#conclusions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The experimental results showcase the power efficiency of the wireless mesh protocol developed by Oscilx Labs. The protocol achieved these results while using minimal resources. The power consumption results are on the higher side as the hardware used is general purpose and not fully low-power optimised. The measured current in the stop and transmission mode is 4.5µA and 18mA respectively which matches the datasheets. With the planned shift to a newer RF SOC, these numbers are expected to drop to &lt;1µA and 5.6mA for similar parameters while still remaining competitive in price and performance.</p>
+<p>The experimental results showcase the power efficiency of the Arach mesh protocol. It achieved these results while using minimal resources. The power consumption results are on the higher side as the hardware used is general purpose and not fully low-power optimised. The measured current in the stop and transmission mode is 4.5µA and 18mA respectively which matches the datasheets. With the planned shift to a newer RF SOC, these numbers are expected to drop to &lt;1µA and 5.6mA for similar parameters while still remaining competitive in price and performance.</p>
 
 
   </div>

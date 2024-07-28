@@ -38,12 +38,12 @@
 <meta property="og:url" content="https://oscilx.com/proof-of-concept/" />
 <meta property="og:site_name" content="Oscilx Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-07-21T11:57:36+05:30" />
+<meta property="article:published_time" content="2024-07-28T15:30:39+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Proof of concept" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-21T11:57:36+05:30","datePublished":"2024-07-21T11:57:36+05:30","description":"Introduction","headline":"Proof of concept","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/proof-of-concept/"},"url":"https://oscilx.com/proof-of-concept/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T15:30:39+05:30","datePublished":"2024-07-28T15:30:39+05:30","description":"Introduction","headline":"Proof of concept","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/proof-of-concept/"},"url":"https://oscilx.com/proof-of-concept/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -824,13 +824,13 @@
 
 <time
   
-  data-ts="1721543256"
+  data-ts="1722160839"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jul 21, 2024
+  Jul 28, 2024
 </time>
 
       </span>
@@ -879,7 +879,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1206 words"
+  title="1197 words"
 >
   <em>6 min</em> read</span>
 
@@ -891,11 +891,11 @@
   <div class="content">
     <h2 id="introduction"><span class="me-2">Introduction</span><a href="#introduction" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Here we describe a test run of the Oscilx protocol stack. To effectively test the protocol stack a prototype hardware was assembled. The network was allowed to run for about one day and node-level metrics were collected, plotted and analysed.</p>
+<p>Here we describe a test run of Arach. To effectively test the protocol stack a prototype hardware was assembled. The network was allowed to run for about one day and node-level metrics were collected, plotted and analysed.</p>
 
 <h2 id="protocol-primer"><span class="me-2">Protocol Primer</span><a href="#protocol-primer" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The protocol works by aggressively duty cycling the wireless device’s radio to conserve power, this means that the radio is switched on only when both sender and receiver are ready to communicate and is switched off promptly after that. The power consumption of the device is directly dictated by how long, how frequently and in which mode the radio stays on.</p>
+<p>Arach works by aggressively duty cycling the wireless device’s radio to conserve power, this means that the radio is switched on only when both sender and receiver are ready to communicate and is switched off promptly after that. The power consumption of the device is directly dictated by how long, how frequently and in which mode the radio stays on.</p>
 
 <p>The “how long” is dictated by the amount of data that needs to be transmitted and is calculated by the protocol.</p>
 
@@ -905,8 +905,7 @@
 
 <h2 id="hardware"><span class="me-2">Hardware</span><a href="#hardware" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The software stack is lightweight with very few feature requirements from the hardware.
-The microcontroller needs to have at least:</p>
+<p>The software stack is lightweight with very few feature requirements. The microcontroller needs to have at least:</p>
 
 <ol>
   <li>20kB of program memory(flash)</li>
@@ -919,7 +918,7 @@ The microcontroller needs to have at least:</p>
 
 <p>To showcase the low resource utilisation we went with the cheapest mainstream microcontroller available that satisfied the requirements, the STM32G030F6P6TR (<a href="https://www.st.com/en/microcontrollers-microprocessors/stm32g030f6.html" target="_blank">product page</a>). The ARM Cortex M0+ CPU, though capable of running up to 64MHz was clocked at the default 16MHz as the device functioned properly even at the slower clock (Can be reduced further but this wasn’t the objective of the tests conducted, for now).</p>
 
-<p>For the radio, the protocol requires support for:</p>
+<p>For the radio, Arach requires support for:</p>
 
 <ol>
   <li>Sending data</li>
@@ -964,7 +963,7 @@ An LDR with a series resistor is added between the VDD and ground and the juncti
 
 <p>The devices ran an application that measured the supply voltage(VDD) and light intensity values using the LDR and the internal voltage reference of the ADC in the microcontroller. The data was packed into a packet along with a timestamp and transmitted every 10 seconds. The network was also set to periodically generate node metric packets that recorded the time each node spent in transmit and receive modes.</p>
 
-<p>The protocol stack along with the application was compiled using the ARM Compiler 6(AC6). The resulting binary required 15kB flash and 3kB SRAM. The unused 5kB SRAM was allocated to make the network buffers larger than their default configuration to use all available space. The software is written to allocate all memory statically and has been tested using address sanitisers and static code analysers to ensure memory safety.</p>
+<p>The Arach stack along with the application was compiled using the ARM Compiler 6(AC6). The resulting binary required 15kB flash and 3kB SRAM. The unused 5kB SRAM was allocated to make the network buffers larger than their default configuration to use all available space. The software is written to allocate all memory statically and has been tested using address sanitisers and static code analysers to ensure memory safety.</p>
 
 <p><code class="language-plaintext highlighter-rouge">Note: The build system now supports GCC and LLVM toolchains in addition to Keil.</code></p>
 
@@ -1010,7 +1009,7 @@ The test was run for about one day and the data recorded is as follows:
 No packets were lost during the test because of a robust retransmission mechanism.</p>
 
 <h2 id="conclusion"><span class="me-2">Conclusion</span><a href="#conclusion" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<p>The software stack was successfully tested on the custom hardware and produced results as promised. The tests also demonstrated the protocol’s capability to run on one of the lowest-end microcontrollers thereby validating its low resource utilisation claims. Since this proof of concept test was run, the software has gone through a few iterations, adding new features and ironing out issues like the spikes in the duty cycles seen in the dashboard plots.</p>
+<p>The software stack was successfully tested on the custom hardware and produced results as promised. The tests also demonstrated Arach’s capability to run on one of the lowest-end microcontrollers thereby validating its low resource utilisation claims. Since this proof of concept test was run, the software has gone through a few iterations, adding new features and ironing out issues like the spikes in the duty cycles seen in the dashboard plots.</p>
 
 <p>Do check out the <a href="/benchmark" target="_blank">benchmark</a> tab to see the power consumption measurements taken using industry-standard equipment for the latest version of the software.</p>
 

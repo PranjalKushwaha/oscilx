@@ -38,12 +38,12 @@
 <meta property="og:url" content="https://oscilx.com/technology/" />
 <meta property="og:site_name" content="Oscilx Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-07-21T11:57:36+05:30" />
+<meta property="article:published_time" content="2024-07-28T15:30:39+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Technology" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-21T11:57:36+05:30","datePublished":"2024-07-21T11:57:36+05:30","description":"Introduction","headline":"Technology","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/technology/"},"url":"https://oscilx.com/technology/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T15:30:39+05:30","datePublished":"2024-07-28T15:30:39+05:30","description":"Introduction","headline":"Technology","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/technology/"},"url":"https://oscilx.com/technology/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -614,13 +614,13 @@
 
 <time
   
-  data-ts="1721543256"
+  data-ts="1722160839"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Jul 21, 2024
+  Jul 28, 2024
 </time>
 
       </span>
@@ -669,9 +669,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="517 words"
+  title="806 words"
 >
-  <em>2 min</em> read</span>
+  <em>4 min</em> read</span>
 
         </div>
       </div>
@@ -681,55 +681,56 @@
   <div class="content">
     <h2 id="introduction"><span class="me-2">Introduction</span><a href="#introduction" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>This writeup introduces the wireless mesh protocol stack developed by Oscilx Labs from a technical perspective. Certain concepts and explanations are intentionally kept vague. Detailed technical white papers can be obtained by <a href="/contact" target="_blank">contacting us directly</a>.</p>
+<p>This writeup introduces the working principle and improvements made by our Arach mesh stack over the competition. Detailed technical white papers and manuals can be obtained by <a href="/contact" target="\_blank">contacting us directly</a>.</p>
 
 <h2 id="problems-with-current-solutions"><span class="me-2">Problems with current solutions</span><a href="#problems-with-current-solutions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Current market solutions for deploying wireless mesh networks suffer from one major drawback, the routing nodes consume a significant amount of power due to the design of these protocols that require them to be powered on at all times to receive data. This means that in most cases only the last edge node can be battery powered for a long time restricting the area where the network can be successfully deployed.</p>
+<p>Current market solutions for deploying wireless mesh networks suffer from one major drawback, the routing nodes consume a significant amount of power. The design of these protocols require them to be powered on at all times to receive data. This means that in most cases only the edge nodes can be battery powered for a long time, restricting the area where the network can be successfully deployed.</p>
 
-<p>Newer solutions like BLE Mesh, IEEE 802.15.4e and WirelessHART have been proposed to counter this and they are discussed later.</p>
+<p>Newer solutions like BLE Mesh, IEEE 802.15.4e and WirelessHART have been proposed to counter this but they have their own drawbacks which are discussed later.</p>
 
 <h2 id="working-principle"><span class="me-2">Working principle</span><a href="#working-principle" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The end goal for the protocol is simple, reduce energy consumption which in turn translates to reducing the duty cycle of the radio. On analysis of the aforementioned mesh technologies, it is evident that routing nodes keep their radios on in receive mode even if they are not actively using it. This is because there is uncertainty in the transmission time of each node. Our solution was to create a time scheduling algorithm to synchronise the radio activity in the network to obtain the lowest duty cycle. This along with improvements in other aspects of networking allow us to achieve some of the <a href="/benchmark" target="_blank">lowest power consumption numbers for routing nodes</a>.</p>
+<p>The end goal for the protocol is simple, reduce energy consumption, this in turn translates to reducing the duty cycle of the radio. On analysis of the aforementioned mesh technologies, it is evident that routing nodes keep their radios on longer than they need to, either due to sub-optimal routing techniques(BLE mesh) or due to protocol overhead(IEEE 802.15.4e, WirelessHART). Our solution was to create a time scheduling algorithm to synchronise the radio activity in the network to obtain the lowest duty cycle. This along with improvements in other aspects of networking allow us to achieve some of the <a href="/benchmark" target="\_blank">lowest power consumption numbers for routing nodes</a>.</p>
+
+<p>Using extremely precise timing and adjustments Arach manages to minimise the idle radio time. Combined with extremely low protocol overhead using tight data packing and compression, we can achieve extremely low device duty cycle.</p>
 
 <h2 id="improvements"><span class="me-2">Improvements</span><a href="#improvements" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The novel protocol comes with significant improvements over the competition in the areas of:</p>
+<p>Arach comes with significant improvements over the competition in the areas of:</p>
 
-<ul>
-  <li>
-    <p>Link Layer:</p>
-
-    <ol>
-      <li>Network time independent slot scheduling: better slot alignment with nodes at different network depths.</li>
-      <li>Adaptive clock drift correction: allows operation with inaccurate clock sources.</li>
-      <li>Efficient link protocol: Works with overhead as low as 20bytes per 16 data packets.</li>
-      <li>Timeout negotiation: A dynamic slot timeout negotiation based on the number of pending packets.</li>
-      <li>Minimal PHY requirements: Requires the physical layer to support only bare-bones functionality</li>
-    </ol>
-  </li>
-  <li>
-    <p>Network Layer:</p>
-    <ol>
-      <li>Cheaper downstream communication: Low overhead for routing from root to network nodes.</li>
-      <li>Redundant paths: Ensures reliability in case of link failures.</li>
-      <li>Table-less routing: An innovative routing protocol using an algorithm set for packet routing leads to no need for routing tables and other structures saving memory</li>
-    </ol>
-  </li>
-</ul>
+<ol>
+  <li>Network time independent scheduling: better slot alignment with nodes at different network depths</li>
+  <li>Adaptive drift correction: allows operation without external crystal clocks in some cases</li>
+  <li>Efficient link layer: works with an overhead as low as 16 bytes per data packet in the worst case</li>
+  <li>Timeout negotiation: dynamic slot timeout negotiation based on the number of pending packets</li>
+  <li>Efficient downstream communication: low overhead for routing from root to network nodes</li>
+  <li>Passive Redundant paths: redundant paths that do not consume power when inactive</li>
+  <li>Routing: routing techniques that do not require tables or graphs to be maintained</li>
+</ol>
 
 <p>These along with other major innovations throughout the network stack allow extreme energy efficiency with reliability.
-Also due to using easy-to-compute algorithms and state machines, the protocol can be run on relatively low-end processor cores. Also due to code optimisation and overlapping data paths the entire networking stack can fit in &lt;20kB of flash and takes &lt;2kB of SRAM, with the rest left for the user application or reserved by larger network buffers. 
-This allows the usage of much cheaper hardware for deploying the network giving it a serious edge over the competition.</p>
+Due to using easy-to-compute algorithms and state machines, Arach can run on relatively low-end processor cores. With its optimised code and overlapping data paths Arach stack can fit in less than 20kB of flash and use under 2kB of SRAM, with the rest left for the user application or reserved for larger network buffers.
+This allows the usage of much cheaper hardware for Arach deployments, giving it a serious edge over the competition.</p>
 
 <h2 id="comparison-with-competing-standards"><span class="me-2">Comparison with competing standards</span><a href="#comparison-with-competing-standards" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>The main competing technologies in the low power mesh are BLE Mesh, IEEE 802.15.4e and WirelessHART. Here is how Arach improves over each of them.</p>
+
+<p>BLE Mesh uses a managed flooding algorithm for data routing. In this the message is transmitted to each neighbour which has not received the message till the time-to-live(TTL) expires. This causes a lot of unnecessary transmissions with no guarantee of the packet reaching the intended node, sacrificing both power efficiency and reliability.</p>
+
+<p>IEEE 802.15.4e defines a TSCH link layer mechanism for scheduling transmissions. It is usually coupled with the RPL routing protocol for ultra low power networks.<br />
+For constrained devices it uses a source-routing protocol which lists the entire path to be followed resulting in large overhead in downlink communication. Arach with it’s path addressing algorithm achieves the same performance level at a fraction of the overhead.<br />
+TSCH defined in the standard does not provide efficient connection management methods for nodes connected to multiple coodinators for redundancy. They must treat them as a full fledged connections even if they are not being actively used. Arach allows finer control over these connections which saves a significant amount of power.</p>
+
+<p>WirelessHART is a mesh protocol intended for industrial sensors supporting the HART protocol. It relies on the gateway node to create and maintain a network graph, calculate paths based on network metrics and distribute the path information to the nodes routing tables.<br />
+Being a centralized architecture it is heavily reliant on the working of the central gateway node, a failure in which means a failure in maintaining the graph structure and routing tables. A centralised architecture also adds computational overhead for the gateway to run the graph algorithms. Arach eliminates these concerns by using a completely distributed architecture with multiple gateway support.</p>
 
 <div class="table-wrapper"><table>
   <thead>
     <tr>
       <th>Paremeter</th>
-      <th>Oscilx</th>
+      <th>Arach</th>
       <th>WirelessHART</th>
       <th>IEEE 802.15.4e</th>
       <th>BLE Mesh</th>
@@ -738,7 +739,7 @@ This allows the usage of much cheaper hardware for deploying the network giving 
   <tbody>
     <tr>
       <td>Frequency Band</td>
-      <td>2.4Ghz, sub-Ghz</td>
+      <td>Any</td>
       <td>2.4GHz</td>
       <td>2.4Ghz, sub-Ghz</td>
       <td>2.4GHz</td>
@@ -759,17 +760,10 @@ This allows the usage of much cheaper hardware for deploying the network giving 
     </tr>
     <tr>
       <td>Routing</td>
-      <td>Proprietary</td>
+      <td>RPL+Optimized source</td>
       <td>Centralised Graph</td>
-      <td>RPL</td>
+      <td>RPL+ Source</td>
       <td>Network Flodding</td>
-    </tr>
-    <tr>
-      <td>Group Acknoledgements</td>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td>No</td>
     </tr>
     <tr>
       <td>Physical layer spec</td>
@@ -780,7 +774,6 @@ This allows the usage of much cheaper hardware for deploying the network giving 
     </tr>
   </tbody>
 </table></div>
-
 
   </div>
 
