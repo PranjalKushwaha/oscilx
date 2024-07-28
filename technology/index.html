@@ -38,12 +38,12 @@
 <meta property="og:url" content="https://oscilx.com/technology/" />
 <meta property="og:site_name" content="Oscilx Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-07-28T15:30:39+05:30" />
+<meta property="article:published_time" content="2024-07-28T16:07:40+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Technology" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T15:30:39+05:30","datePublished":"2024-07-28T15:30:39+05:30","description":"Introduction","headline":"Technology","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/technology/"},"url":"https://oscilx.com/technology/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T16:07:40+05:30","datePublished":"2024-07-28T16:07:40+05:30","description":"Introduction","headline":"Technology","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/technology/"},"url":"https://oscilx.com/technology/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -614,7 +614,7 @@
 
 <time
   
-  data-ts="1722160839"
+  data-ts="1722163060"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -669,7 +669,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="806 words"
+  title="805 words"
 >
   <em>4 min</em> read</span>
 
@@ -681,7 +681,7 @@
   <div class="content">
     <h2 id="introduction"><span class="me-2">Introduction</span><a href="#introduction" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>This writeup introduces the working principle and improvements made by our Arach mesh stack over the competition. Detailed technical white papers and manuals can be obtained by <a href="/contact" target="\_blank">contacting us directly</a>.</p>
+<p>This write-up introduces the working principle and improvements made by our Arach mesh stack over the competition. Detailed technical white papers and manuals can be obtained by <a href="/contact" target="\_blank">contacting us directly</a>.</p>
 
 <h2 id="problems-with-current-solutions"><span class="me-2">Problems with current solutions</span><a href="#problems-with-current-solutions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -691,9 +691,9 @@
 
 <h2 id="working-principle"><span class="me-2">Working principle</span><a href="#working-principle" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The end goal for the protocol is simple, reduce energy consumption, this in turn translates to reducing the duty cycle of the radio. On analysis of the aforementioned mesh technologies, it is evident that routing nodes keep their radios on longer than they need to, either due to sub-optimal routing techniques(BLE mesh) or due to protocol overhead(IEEE 802.15.4e, WirelessHART). Our solution was to create a time scheduling algorithm to synchronise the radio activity in the network to obtain the lowest duty cycle. This along with improvements in other aspects of networking allow us to achieve some of the <a href="/benchmark" target="\_blank">lowest power consumption numbers for routing nodes</a>.</p>
+<p>The end goal for the protocol is simple, reduce energy consumption, this in turn translates to reducing the duty cycle of the radio. On analysis of the aforementioned mesh technologies, it is evident that routing nodes keep their radios on longer than they need to, either due to suboptimal routing techniques(BLE mesh) or due to protocol overhead(IEEE 802.15.4e, WirelessHART). Our solution was to create a time scheduling algorithm to synchronize the radio activity in the network to obtain the lowest duty cycle. This along with improvements in other aspects of networking allow us to achieve some of the <a href="/benchmark" target="\_blank">lowest power consumption numbers for routing nodes</a>.</p>
 
-<p>Using extremely precise timing and adjustments Arach manages to minimise the idle radio time. Combined with extremely low protocol overhead using tight data packing and compression, we can achieve extremely low device duty cycle.</p>
+<p>Using extremely precise timing and adjustments Arach manages to minimize the idle radio time. Combined with extremely low protocol overhead using tight data packing and compression, we can achieve extremely low device duty cycle.</p>
 
 <h2 id="improvements"><span class="me-2">Improvements</span><a href="#improvements" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -710,26 +710,26 @@
 </ol>
 
 <p>These along with other major innovations throughout the network stack allow extreme energy efficiency with reliability.
-Due to using easy-to-compute algorithms and state machines, Arach can run on relatively low-end processor cores. With its optimised code and overlapping data paths Arach stack can fit in less than 20kB of flash and use under 2kB of SRAM, with the rest left for the user application or reserved for larger network buffers.
+Due to using easy-to-compute algorithms and state machines, Arach can run on relatively low-end processor cores. With its optimized code and overlapping data paths Arach stack can fit in less than 20kB of flash and use under 2kB of SRAM, with the rest left for the user application or reserved for larger network buffers.
 This allows the usage of much cheaper hardware for Arach deployments, giving it a serious edge over the competition.</p>
 
 <h2 id="comparison-with-competing-standards"><span class="me-2">Comparison with competing standards</span><a href="#comparison-with-competing-standards" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <p>The main competing technologies in the low power mesh are BLE Mesh, IEEE 802.15.4e and WirelessHART. Here is how Arach improves over each of them.</p>
 
-<p>BLE Mesh uses a managed flooding algorithm for data routing. In this the message is transmitted to each neighbour which has not received the message till the time-to-live(TTL) expires. This causes a lot of unnecessary transmissions with no guarantee of the packet reaching the intended node, sacrificing both power efficiency and reliability.</p>
+<p>BLE Mesh uses a managed flooding algorithm for data routing. In this the message is transmitted to each neighbor which has not received the message till the time-to-live(TTL) expires. This causes a lot of unnecessary transmissions with no guarantee of the packet reaching the intended node, sacrificing both power efficiency and reliability.</p>
 
 <p>IEEE 802.15.4e defines a TSCH link layer mechanism for scheduling transmissions. It is usually coupled with the RPL routing protocol for ultra low power networks.<br />
-For constrained devices it uses a source-routing protocol which lists the entire path to be followed resulting in large overhead in downlink communication. Arach with it’s path addressing algorithm achieves the same performance level at a fraction of the overhead.<br />
-TSCH defined in the standard does not provide efficient connection management methods for nodes connected to multiple coodinators for redundancy. They must treat them as a full fledged connections even if they are not being actively used. Arach allows finer control over these connections which saves a significant amount of power.</p>
+For constrained devices it uses a source-routing protocol which lists the entire path to be followed resulting in large overhead in downlink communication. Arach with its path addressing algorithm achieves the same performance level at a fraction of the overhead.<br />
+TSCH defined in the standard does not provide efficient connection management methods for nodes connected to multiple coordinators for redundancy. They must treat them as a full-fledged connections even if they are not being actively used. Arach allows finer control over these connections which saves a significant amount of power.</p>
 
 <p>WirelessHART is a mesh protocol intended for industrial sensors supporting the HART protocol. It relies on the gateway node to create and maintain a network graph, calculate paths based on network metrics and distribute the path information to the nodes routing tables.<br />
-Being a centralized architecture it is heavily reliant on the working of the central gateway node, a failure in which means a failure in maintaining the graph structure and routing tables. A centralised architecture also adds computational overhead for the gateway to run the graph algorithms. Arach eliminates these concerns by using a completely distributed architecture with multiple gateway support.</p>
+Being a centralized architecture it is heavily reliant on the working of the central gateway node, a failure in which means a failure in maintaining the graph structure and routing tables. A centralized architecture also adds computational overhead for the gateway to run the graph algorithms. Arach eliminates these concerns by using a completely distributed architecture with multiple gateway support.</p>
 
 <div class="table-wrapper"><table>
   <thead>
     <tr>
-      <th>Paremeter</th>
+      <th>Parameter</th>
       <th>Arach</th>
       <th>WirelessHART</th>
       <th>IEEE 802.15.4e</th>
@@ -741,7 +741,7 @@ Being a centralized architecture it is heavily reliant on the working of the cen
       <td>Frequency Band</td>
       <td>Any</td>
       <td>2.4GHz</td>
-      <td>2.4Ghz, sub-Ghz</td>
+      <td>2.4Ghz, sub-GHz</td>
       <td>2.4GHz</td>
     </tr>
     <tr>
@@ -754,16 +754,16 @@ Being a centralized architecture it is heavily reliant on the working of the cen
     <tr>
       <td>Slot Scheduling</td>
       <td>Distributed</td>
-      <td>Centralised</td>
+      <td>Centralized</td>
       <td>Distributed</td>
       <td>Distributed</td>
     </tr>
     <tr>
       <td>Routing</td>
       <td>RPL+Optimized source</td>
-      <td>Centralised Graph</td>
+      <td>Centralized Graph</td>
       <td>RPL+ Source</td>
-      <td>Network Flodding</td>
+      <td>Network Flooding</td>
     </tr>
     <tr>
       <td>Physical layer spec</td>

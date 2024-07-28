@@ -38,12 +38,12 @@
 <meta property="og:url" content="https://oscilx.com/proof-of-concept/" />
 <meta property="og:site_name" content="Oscilx Labs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-07-28T15:30:39+05:30" />
+<meta property="article:published_time" content="2024-07-28T16:07:40+05:30" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Proof of concept" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T15:30:39+05:30","datePublished":"2024-07-28T15:30:39+05:30","description":"Introduction","headline":"Proof of concept","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/proof-of-concept/"},"url":"https://oscilx.com/proof-of-concept/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-28T16:07:40+05:30","datePublished":"2024-07-28T16:07:40+05:30","description":"Introduction","headline":"Proof of concept","mainEntityOfPage":{"@type":"WebPage","@id":"https://oscilx.com/proof-of-concept/"},"url":"https://oscilx.com/proof-of-concept/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -824,7 +824,7 @@
 
 <time
   
-  data-ts="1722160839"
+  data-ts="1722163060"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -879,7 +879,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1197 words"
+  title="1195 words"
 >
   <em>6 min</em> read</span>
 
@@ -891,7 +891,7 @@
   <div class="content">
     <h2 id="introduction"><span class="me-2">Introduction</span><a href="#introduction" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Here we describe a test run of Arach. To effectively test the protocol stack a prototype hardware was assembled. The network was allowed to run for about one day and node-level metrics were collected, plotted and analysed.</p>
+<p>Here we describe a test run of Arach. To effectively test the protocol stack a prototype hardware was assembled. The network was allowed to run for about one day and node-level metrics were collected, plotted and analyzed.</p>
 
 <h2 id="protocol-primer"><span class="me-2">Protocol Primer</span><a href="#protocol-primer" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
@@ -916,7 +916,7 @@
   <li>A low power mode for power consumption</li>
 </ol>
 
-<p>To showcase the low resource utilisation we went with the cheapest mainstream microcontroller available that satisfied the requirements, the STM32G030F6P6TR (<a href="https://www.st.com/en/microcontrollers-microprocessors/stm32g030f6.html" target="_blank">product page</a>). The ARM Cortex M0+ CPU, though capable of running up to 64MHz was clocked at the default 16MHz as the device functioned properly even at the slower clock (Can be reduced further but this wasn’t the objective of the tests conducted, for now).</p>
+<p>To showcase the low resource utilization we went with the cheapest mainstream microcontroller available that satisfied the requirements, the STM32G030F6P6TR (<a href="https://www.st.com/en/microcontrollers-microprocessors/stm32g030f6.html" target="_blank">product page</a>). The ARM Cortex M0+ CPU, though capable of running up to 64MHz was clocked at the default 16MHz as the device functioned properly even at the slower clock (Can be reduced further, but this wasn’t the objective of the tests conducted, for now).</p>
 
 <p>For the radio, Arach requires support for:</p>
 
@@ -927,8 +927,8 @@
   <li>Power down modes</li>
 </ol>
 
-<p>Thats it! Packet integrity checks typically performed by the radio baseband are done by the software using lightweight cryptographic algorithms. This method eases the requirements for the radio hardware while utilising the CPU idle time.<br />
-The radio chosen for the prototype is NRF24L01+ operating in the 2.4GHz ISM band. It fulfils all the requirements and the advanced features like auto-retransmission and acknowledgements it supports can be easily disabled as these are handled by the software. It connects to the microcontroller using an 8MHz full-duplex SPI bus.</p>
+<p>That’s it! Packet integrity checks typically performed by the radio baseband are done by the software using lightweight cryptographic algorithms. This method eases the requirements for the radio hardware while utilizing the CPU idle time.<br />
+The radio chosen for the prototype is NRF24L01+ operating in the 2.4GHz ISM band. It fulfills all the requirements and the advanced features like auto-retransmission and acknowledgements it supports can be easily disabled as these are handled by the software. It connects to the microcontroller using an 8MHz full-duplex SPI bus.</p>
 
 <p>The final device has a microcontroller, a radio and a 32.768kHz crystal on a PCB and is powered by 2xAA alkaline cells. It is programmed using the SWD headers. Four unused GPIO pins are exposed as headers for attaching sensors and debug probes.
 <a href="/assets/images/node_image.jpg" class="popup img-link  shimmer"><img src="/assets/images/node_image.jpg" alt="Prototype Image" loading="lazy"></a>
@@ -963,7 +963,7 @@ An LDR with a series resistor is added between the VDD and ground and the juncti
 
 <p>The devices ran an application that measured the supply voltage(VDD) and light intensity values using the LDR and the internal voltage reference of the ADC in the microcontroller. The data was packed into a packet along with a timestamp and transmitted every 10 seconds. The network was also set to periodically generate node metric packets that recorded the time each node spent in transmit and receive modes.</p>
 
-<p>The Arach stack along with the application was compiled using the ARM Compiler 6(AC6). The resulting binary required 15kB flash and 3kB SRAM. The unused 5kB SRAM was allocated to make the network buffers larger than their default configuration to use all available space. The software is written to allocate all memory statically and has been tested using address sanitisers and static code analysers to ensure memory safety.</p>
+<p>The Arach stack along with the application was compiled using the ARM Compiler 6(AC6). The resulting binary required 15kB flash and 3kB SRAM. The unused 5kB SRAM was allocated to make the network buffers larger than their default configuration to use all available space. The software is written to allocate all memory statically and has been tested using address sanitizers and static code analyzers to ensure memory safety.</p>
 
 <p><code class="language-plaintext highlighter-rouge">Note: The build system now supports GCC and LLVM toolchains in addition to Keil.</code></p>
 
@@ -978,14 +978,14 @@ An LDR with a series resistor is added between the VDD and ground and the juncti
 
 <h2 id="experiment"><span class="me-2">Experiment</span><a href="#experiment" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>The test involved 9 nodes, 1 root and 8 network nodes. The network nodes were flashed with the program and kept in different rooms/corridors making sure each node had a minimum of 20 meters or 1 brick wall separating it from all other nodes. The testing was done in a residential complex with many 2.4GHz wifi access points and other interfering equipment.</p>
+<p>The test involved 9 nodes, 1 root and 8 network nodes. The network nodes were flashed with the program and kept in different rooms/corridors making sure each node had a minimum of 20 meters or 1 brick wall separating it from all other nodes. The testing was done in a residential complex with many 2.4GHz WiFi access points and other interfering equipment.</p>
 
-<p>The root node was connected to an ESP32 which acted as a gateway for the network. The root sent all data received via the application UART to the ESP32 which inserted it into a PostgreSQL instance running in the cloud. The system UART was routed to a Raspberry Pi 4B for log collection and analysis, no administrative commands were issued to the root node. The RPI was also acting as a wifi access point using the to which the ESP32 connected for internet access. The final setup looked like this:<br />
+<p>The root node was connected to an ESP32 which acted as a gateway for the network. The root sent all data received via the application UART to the ESP32 which inserted it into a PostgreSQL instance running in the cloud. The system UART was routed to a Raspberry Pi 4B for log collection and analysis, no administrative commands were issued to the root node. The RPI was also acting as a WiFi access point to which the ESP32 connected for internet access. The final setup looked like this:<br />
 <a href="/assets/images/poc_root.jpg" class="popup img-link  shimmer"><img src="/assets/images/poc_root.jpg" alt="Image of the root node and gateway setup" loading="lazy"></a></p>
 
 <p>Placing the root node close to such a high RF activity area was intentional and part of the endurance test to gauge the impact and effectiveness of the channel hopping scheme against harsh RF environments (there were three devices connected to the RPI access point at all times during the test).</p>
 
-<p>The application on the root node received data from all the network nodes and serialised it to send to the ESP32 gateway.
+<p>The application on the root node received data from all the network nodes and serialized it to send to the ESP32 gateway.
 The data flow for this UART looked like:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="code-header">
@@ -994,7 +994,7 @@ The data flow for this UART looked like:</p>
 </pre></td><td class="rouge-code"><pre>(ROOT NODE | APP UART)--UART-&gt;(ESP32)--WiFi-&gt;(RPI)--Internet-&gt;(Cloud | PostgreSQL) 
 </pre></td></tr></tbody></table></code></div></div>
 
-<p>The system UART logged data directly to a file which could be analysed in real time or later.</p>
+<p>The system UART logged data directly to a file which could be analyzed in real time or later.</p>
 <div class="language-plaintext highlighter-rouge"><div class="code-header">
         <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -1009,7 +1009,7 @@ The test was run for about one day and the data recorded is as follows:
 No packets were lost during the test because of a robust retransmission mechanism.</p>
 
 <h2 id="conclusion"><span class="me-2">Conclusion</span><a href="#conclusion" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<p>The software stack was successfully tested on the custom hardware and produced results as promised. The tests also demonstrated Arach’s capability to run on one of the lowest-end microcontrollers thereby validating its low resource utilisation claims. Since this proof of concept test was run, the software has gone through a few iterations, adding new features and ironing out issues like the spikes in the duty cycles seen in the dashboard plots.</p>
+<p>The software stack was successfully tested on the custom hardware and produced results as promised. The tests also demonstrated Arach’s capability to run on one of the lowest-end microcontrollers thereby validating its low resource utilization claims. Since this proof of concept test was run, the software has gone through a few iterations, adding new features and ironing out issues like the spikes in the duty cycles seen in the dashboard plots.</p>
 
 <p>Do check out the <a href="/benchmark" target="_blank">benchmark</a> tab to see the power consumption measurements taken using industry-standard equipment for the latest version of the software.</p>
 
